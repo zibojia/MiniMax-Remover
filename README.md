@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/zibojia"><b>Bojia Zi</b></a><sup>*</sup>,
+  Bojia Zi<sup>*</sup>,
   Weixuan Peng<sup>*</sup>,
   Xianbiao Qi<sup>†</sup>,
   Jianan Wang, Shihao Zhao, Rong Xiao, Kam-Fai Wong<br>
@@ -23,11 +23,17 @@
 
 ## 🚀 Overview
 
-**MiniMax-Remover** is a fast and effective video object remover, only 6 inference steps, without the CFG usage.
+**MiniMax-Remover** is a fast and effective video object remover based on minimax optimization. It operates in two stages: the first stage trains a remover using a simplified DiT architecture, while the second stage distills a robust remover with CFG removal and fewer inference steps.
 
-- **[Online demo (Hugging Face Spaces)](https://huggingface.co/spaces/zibojia/MiniMaxRemover)**
-- **[Demo Video (YouTube)](https://www.youtube.com/watch?v=KaU5yNl6CTc)**
-- **[Model & Code (GitHub)](https://github.com/zibojia/minimax_remover)**
+---
+
+## ✨ Features: 
+
+* **Fast:** Requires only 6 inference steps and does not use CFG, making it highly efficient.
+
+* **Effective:** Seamlessly removes objects from videos and generates high-quality visual content.
+
+* **Robust:** Maintains robustness by preventing the regeneration of undesired objects or artifacts within the masked region, even under varying noise conditions.
 
 ---
 
@@ -84,51 +90,6 @@ result = pipe(images=images, masks=masks, num_frames=video_length, height=480, w
 ).frames[0]
 export_to_video(result, "./output.mp4")
 ```
-
-- `images`: Video frames, must be normalized to the range `[-1, 1]`
-- `masks`: Mask frames, must be normalized to the range `[0, 1]`
-
----
-
-## 🔑 Important Parameters
-
-When calling the pipeline, **do not change these unless you know what you're doing**:
-
-- `height=480`
-- `width=832`
-- `num_inference_steps=12`
-
-These control output resolution and the speed/quality tradeoff. Changing them may cause shape errors or degrade results.
-
----
-
-## 📥 Input & Output
-
-- **Input Video:** `./video.mp4`
-- **Mask Video:** `./mask.mp4` (single channel, auto-binarized)
-- **Output Video:** `./output.mp4`
-
-**Note:** The input and mask video must have the same number of frames (default: 81).
-
----
-
-## ⚙️ Parameter Descriptions
-
-| Parameter             | Description                                                    | Default |
-|-----------------------|----------------------------------------------------------------|---------|
-| `iterations`          | Mask dilation hyperparameter (controls inpainting margin)      | 6       |
-| `num_frames`          | Number of frames to process                                   | 81      |
-| `height`, `width`     | Output video resolution                                       | 480x832 |
-| `num_inference_steps` | Diffusion steps                                               | 12      |
-
-Other parameters can be adjusted in the pipeline call.
-
----
-
-## 🙏 Acknowledgements
-
-This project is for academic research purposes only and must **not** be used for any commercial activities.
-
 ---
 
 ## 📧 Contact
