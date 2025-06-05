@@ -1,0 +1,7 @@
+torch==2.6
+decord==0.6
+diffusers==0.33.1
+pillow==9.2
+einops==0.8.0
+scipy==1.14.0
+numpy==1.26.4
