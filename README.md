@@ -41,11 +41,11 @@ pip install -r requirements.txt
 
 ---
 
-## 📺 Demo Video
+## 📂 Model Weights
 
-Click the image to watch the demo on YouTube:
-
-[![Demo](https://img.youtube.com/vi/KaU5yNl6CTc/0.jpg)](https://www.youtube.com/watch?v=KaU5yNl6CTc)
+```shell
+huggingface-cli download zibojia/minimax-remover --include vae transformer scheduler --local-dir .
+```
 
 ---
 
@@ -79,8 +79,7 @@ pipe = Minimax_Remover_Pipeline(vae=vae, transformer=transformer, \
     scheduler=scheduler, torch_dtype=torch.float16
 ).to(device)
 
-result = pipe(images=images, masks=masks, \
-    num_frames=video_length, height=480, width=832, \
+result = pipe(images=images, masks=masks, num_frames=video_length, height=480, width=832, \
     num_inference_steps=12, generator=torch.Generator(device=device).manual_seed(random_seed), iterations=6 \
 ).frames[0]
 export_to_video(result, "./output.mp4")
@@ -123,14 +122,6 @@ These control output resolution and the speed/quality tradeoff. Changing them ma
 | `num_inference_steps` | Diffusion steps                                               | 12      |
 
 Other parameters can be adjusted in the pipeline call.
-
----
-
-## 📂 Model Weights
-
-```shell
-huggingface-cli download zibojia/minimax-remover --include vae transformer scheduler --local-dir .
-```
 
 ---
 
