@@ -12,10 +12,11 @@
 
 <p align="center">
   <a href="https://huggingface.co/zibojia/MiniMaxRemover"><img alt="Huggingface Model" src="https://img.shields.io/badge/%F0%9F%A4%97%20Huggingface-Model-brightgreen"></a>
-  <a href="https://github.com/zibojia/MiniMax-Remover"><img alt="Github" src="https://img.shields.io/badge/MiniMaxRemover-github-grey"></a>
+  <a href="https://github.com/zibojia/MiniMax-Remover"><img alt="Github" src="https://img.shields.io/badge/MiniMaxRemover-github-black"></a>
   <a href="https://huggingface.co/spaces/zibojia/MiniMaxRemover"><img alt="Huggingface Space" src="https://img.shields.io/badge/%F0%9F%A4%97%20Huggingface-Space-1e90ff"></a>
   <a href="https://arxiv.org/abs/2505.24873"><img alt="arXiv" src="https://img.shields.io/badge/MiniMaxRemover-arXiv-b31b1b"></a>
   <a href="https://www.youtube.com/watch?v=KaU5yNl6CTc"><img alt="YouTube" src="https://img.shields.io/badge/Youtube-video-ff0000"></a>
+  <a href="https://minimax-remover.github.io"><img alt="Demo Page" src="https://img.shields.io/badge/Website-Demo%20Page-yellow"></a>
 </p>
 
 ---
@@ -70,40 +71,17 @@ vae = AutoencoderKLWan.from_pretrained("./vae", torch_dtype=torch.float16)
 transformer = Transformer3DModel.from_pretrained("./transformer", torch_dtype=torch.float16)
 scheduler = UniPCMultistepScheduler.from_pretrained("./scheduler")
 
-# Load video and mask
-def load_video(path):
-    vr = VideoReader(path)
-    imgs = vr.get_batch(list(range(video_length))).asnumpy()
-    return torch.from_numpy(imgs) / 127.5 - 1.0  # [-1, 1]
-
-def load_mask(path):
-    vr = VideoReader(path)
-    masks = vr.get_batch(list(range(video_length))).asnumpy()
-    masks = torch.from_numpy(masks)[:, :, :, :1]
-    masks[masks > 20] = 255
-    masks[masks < 255] = 0
-    return masks / 255.0  # [0, 1]
-
-images = load_video("./video.mp4")      # images in range [-1, 1]
-masks = load_mask("./mask.mp4")         # masks in range [0, 1]
+images = # images in range [-1, 1]
+masks = # masks in range [0, 1]
 
 # Initialize the pipeline (pass the loaded weights as objects)
-pipe = Minimax_Remover_Pipeline(
-    vae=vae,
-    transformer=transformer,
-    scheduler=scheduler,
-    torch_dtype=torch.float16
+pipe = Minimax_Remover_Pipeline(vae=vae, transformer=transformer, \
+    scheduler=scheduler, torch_dtype=torch.float16
 ).to(device)
 
-result = pipe(
-    images=images,
-    masks=masks,
-    num_frames=video_length,
-    height=480,
-    width=832,
-    num_inference_steps=12,
-    generator=torch.Generator(device=device).manual_seed(random_seed),
-    iterations=6
+result = pipe(images=images, masks=masks, \
+    num_frames=video_length, height=480, width=832, \
+    num_inference_steps=12, generator=torch.Generator(device=device).manual_seed(random_seed), iterations=6 \
 ).frames[0]
 export_to_video(result, "./output.mp4")
 ```
@@ -141,8 +119,8 @@ These control output resolution and the speed/quality tradeoff. Changing them ma
 |-----------------------|----------------------------------------------------------------|---------|
 | `iterations`          | Mask dilation hyperparameter (controls inpainting margin)      | 6       |
 | `num_frames`          | Number of frames to process                                   | 81      |
-| `height`, `width`     | Output video resolution                                       | 480,832 |
-| `num_inference_steps` | Diffusion steps per frame (higher = better quality, slower)   | 12      |
+| `height`, `width`     | Output video resolution                                       | 480x832 |
+| `num_inference_steps` | Diffusion steps                                               | 12      |
 
 Other parameters can be adjusted in the pipeline call.
 
@@ -150,20 +128,9 @@ Other parameters can be adjusted in the pipeline call.
 
 ## 📂 Model Weights
 
-Place model weights in the following directories:
-
-- `./vae/`
-- `./transformer/`
-- `./scheduler/`
-
-You should load each component separately (as shown above) and pass the loaded objects to the pipeline.
-
----
-
-## 💡 Notes
-
-- `transformer_minimax_remover` and `pipeline_minimax_remover` are included as project modules and do **not** require separate installation.
-- This repository is intended for **academic research only**. **Commercial use is strictly prohibited.**
+```shell
+huggingface-cli download zibojia/minimax-remover --include vae transformer scheduler --local-dir .
+```
 
 ---
 
