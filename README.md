@@ -23,7 +23,7 @@
 
 ## 🚀 Overview
 
-**MiniMax-Remover** is an advanced video object removal pipeline designed to robustly inpaint video regions while taming noise. It achieves state-of-the-art results by carefully handling temporal consistency and mask corruption, as described in our [arXiv paper](https://arxiv.org/abs/2505.24873).
+**MiniMax-Remover** is a fast and effective video object remover, only 6 inference steps, without the CFG usage.
 
 - **[Online demo (Hugging Face Spaces)](https://huggingface.co/spaces/zibojia/MiniMaxRemover)**
 - **[Demo Video (YouTube)](https://www.youtube.com/watch?v=KaU5yNl6CTc)**
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📂 Model Weights
+## 📂 Download
 
 ```shell
 huggingface-cli download zibojia/minimax-remover --include vae transformer scheduler --local-dir .
