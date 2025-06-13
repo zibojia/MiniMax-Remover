@@ -9,3 +9,4 @@ opencv-python==4.5.5.64
 huggingface_hub==0.32.4
 omegaconf
 einops
+accelerate==0.30.1
