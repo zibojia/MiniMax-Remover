@@ -17,6 +17,7 @@
   <a href="https://arxiv.org/abs/2505.24873"><img alt="arXiv" src="https://img.shields.io/badge/MiniMaxRemover-arXiv-b31b1b"></a>
   <a href="https://www.youtube.com/watch?v=KaU5yNl6CTc"><img alt="YouTube" src="https://img.shields.io/badge/Youtube-video-ff0000"></a>
   <a href="https://minimax-remover.github.io"><img alt="Demo Page" src="https://img.shields.io/badge/Website-Demo%20Page-yellow"></a>
+  <a href="https://replicate.com/ayushunleashed/minimax-remover"><img alt="Replicate" src="https://replicate.com/cjwbw/i2vgen-xl/badge"></a>
 </p>
 
 ---
