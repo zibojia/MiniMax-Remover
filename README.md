@@ -56,9 +56,6 @@ cd gradio_demo
 python3 test.py
 ```
 
-<video src="videos/gradio_demo.mp4" controls width="500"></video>
-
-
 ---
 
 ## 📂 Download
