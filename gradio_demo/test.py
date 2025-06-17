@@ -400,4 +400,4 @@ with gr.Blocks() as demo:
         clear_btn.click(clear_clicks, inputs=video_state, outputs=image_output)
         track_btn.click(track_video, inputs=[n_frames_slider, video_state], outputs=video_output)
 
-demo.launch(server_name="0.0.0.0", server_port=8001)
+demo.launch(server_name="0.0.0.0", server_port=8000)
