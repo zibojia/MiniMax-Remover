@@ -10,3 +10,4 @@ huggingface_hub==0.32.4
 omegaconf
 einops
 accelerate==0.30.1
+gradio==3.40.0
