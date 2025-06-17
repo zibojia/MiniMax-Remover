@@ -47,6 +47,17 @@ pip install -r requirements.txt
 
 ---
 
+## 🏃‍♂️ Gradio Demo
+
+You can use this gradio demo to remove objects. Note that you don't need to compile the sam2.
+
+```bash
+cd gradio_demo
+python3 test.py
+```
+
+---
+
 ## 📂 Download
 
 ```shell
