@@ -1,0 +1,9 @@
+# Python
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+model
+SAM2-Video-Predictor
