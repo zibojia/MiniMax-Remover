@@ -1,6 +1,3 @@
----
-license: cc-by-nc-4.0
----
 <h1 align="center">
   MiniMax-Remover: Taming Bad Noise Helps Video Object Removal
 </h1>
