@@ -101,6 +101,7 @@ def get_video_info(video_path, video_state):
 
 def segment_frame(evt: gr.SelectData, label, video_state):
     if video_state["origin_images"] is None:
+        gr.Warning("Please click \"Extract First Frame\" to extract the first frame first, then click the annotation")
         return None
     x, y = evt.index
     new_point = [x, y]
@@ -218,6 +219,9 @@ def inference_and_return_video(dilation_iterations, num_inference_steps, video_s
 
 
 def track_video(n_frames, video_state):
+    if video_state["origin_images"] is None or video_state["masks"] is None:
+        gr.Warning("Please complete target segmentation on the first frame first, then click Tracking")
+        return None
 
     input_points = video_state["input_points"]
     input_labels = video_state["input_labels"]
