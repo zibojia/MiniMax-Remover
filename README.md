@@ -59,6 +59,14 @@ huggingface-cli download zibojia/minimax-remover --include vae transformer sched
 ---
 
 ## ⚡ Quick Start
+### Video Object Removal Gradio Demo
+```shell
+python gradio_demo/demo.py
+```
+### Image Object Removal Gradio Demo
+```shell
+python gradio_demo/image_demo.py
+```
 
 ### Minimal Example
 
