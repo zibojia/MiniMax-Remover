@@ -28,8 +28,18 @@ def download_remover():
     snapshot_download(repo_id="zibojia/minimax-remover", local_dir="./model/")
     print("Download minimax remover completed")
 
-download_sam2()
-download_remover()
+SAM2_MARKER = "./SAM2-Video-Predictor/checkpoints/sam2_hiera_large.pt"
+REMOVER_MARKER = "./model/transformer/config.json"
+
+if not os.path.exists(SAM2_MARKER):
+    download_sam2()
+else:
+    print("SAM2 model already exists, skipping download.")
+
+if not os.path.exists(REMOVER_MARKER):
+    download_remover()
+else:
+    print("MiniMax Remover model already exists, skipping download.")
 
 COLOR_PALETTE = [
     (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255),
@@ -220,4 +230,4 @@ with gr.Blocks() as demo:
         outputs=image_output_removed
     )
 
-demo.launch(server_name="0.0.0.0", server_port=8000)
+demo.launch(server_name="127.0.0.1", server_port=8000, share=False)
